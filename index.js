@@ -12,9 +12,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173', // React frontend URL
+  origin: 'http://localhost:5173',
   credentials: true
 }));
+
+// Routes
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
 
 // Test route
 app.get('/', (req, res) => {
