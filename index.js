@@ -15,7 +15,9 @@ app.use(cors({
     'http://localhost:5173',
     'https://studynook-client.vercel.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 const authRoutes = require('./routes/authRoutes');
