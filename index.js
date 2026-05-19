@@ -12,7 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://studynook.vercel.app'
+  ],
   credentials: true
 }));
 
@@ -31,11 +34,13 @@ app.get('/', (req, res) => {
 });
 
 // Connect to MongoDB
+const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('✅ Connected to MongoDB');
-    app.listen(process.env.PORT, () => {
-      console.log(`✅ Server running on port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`✅ Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
