@@ -12,10 +12,10 @@ const getAllRooms = async (req, res) => {
       filter.name = { $regex: search, $options: 'i' };
     }
 
-    // Filter by amenities
+    // Filter by amenities - ALL selected amenities must exist
     if (amenities) {
       const amenityList = amenities.split(',');
-      filter.amenities = { $in: amenityList };
+      filter.amenities = { $all: amenityList }; 
     }
 
     const rooms = await Room.find(filter).populate('owner', 'name email');
@@ -24,7 +24,6 @@ const getAllRooms = async (req, res) => {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
-
 // GET LATEST 6 ROOMS (for home page)
 const getLatestRooms = async (req, res) => {
   try {
