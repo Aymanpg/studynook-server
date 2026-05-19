@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://studynook.vercel.app'
+    'https://studynook-client.vercel.app'
   ],
   credentials: true
 }));
